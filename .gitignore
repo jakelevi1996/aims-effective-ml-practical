@@ -72,3 +72,5 @@ ENV/
 # Hydra
 multirun
 outputs
+
+.*
