@@ -1,0 +1,4 @@
+_target_: models.Linear
+im_size: ${dataset.im_size}
+in_channels: ${dataset.im_channels}
+num_classes: ${dataset.num_classes}

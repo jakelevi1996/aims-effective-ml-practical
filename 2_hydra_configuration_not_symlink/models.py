@@ -8,6 +8,32 @@ from einops.layers.torch import Rearrange
 
 logger = logging.getLogger(__name__)
 
+class Linear(nn.Module):
+    def __init__(
+        self,
+        im_size: tuple[int, int],
+        in_channels: int,
+        num_classes: int,
+    ):
+        super().__init__()
+        input_dim = im_size[0] * im_size[1] * in_channels
+
+        self.model = nn.Linear(input_dim, num_classes)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Neural network forward pass.
+
+        Args:
+            x: Batch tensor of images.
+            Tensor [B, C, H, W]
+        Returns:
+            Batch tensor of outputs.
+            Tensor [B, D_out]
+        """
+        x = x.flatten(start_dim=1)
+        return self.model(x)
+
+
 
 class MLP(nn.Module):
     """Vanilla multi-layer perceptron (MLP) for images.
